@@ -1,5 +1,30 @@
 ---
+import Link from "../components/Link.astro";
 ---
-<div>
-Header - tilføj navigation mm.
+
+<div x-data="{ showmenu: false }" class="fixed lg:static w-full lg:px-24">
+  <div id="navbar" class="flex flex-row justify-between">
+    <div id="logo" class="text-xl">
+      <a href="#hero"></a>
+    </div>
+    <nav id="desktopmenu" class="hidden lg:block">
+      <ul class="flex flex-row gap-12 text-xl font-poppins">
+        <li class=""><a href="#sektion1" class="no-underline">About the font</a></li>
+        <li class=""><a href="#sektion2">How to use</a></li>
+        <li class=""><a href="#sektion3">Design process</a></li>
+      </ul>
+    </nav>
+    <button id="burgermenu" class="lg:hidden" x-on:click="showmenu = ! showmenu">
+      <span :class="{ 'rotate-45 translate-y-2': showmenu }" class="block w-8 h-0.5 bg-black mb-2 transition-all duration-300"></span>
+      <span :class="{ 'opacity-0': showmenu }" class="block w-8 h-0.5 bg-black mb-2 transition-all duration-300"></span>
+      <span :class="{ '-rotate-45 -translate-y-2': showmenu }" class="block w-8 h-0.5 bg-black transition-all duration-300"></span>
+    </button>
+  </div>
+  <nav id="mobilmenu" class="flex flex-col content-center pt-4" x-show="showmenu" x-transition x-on:click="showmenu = false" x-on:click.outside="showmenu = false">
+    <ul>
+      <li class="text-center py-2 border-y-2 border-black"><a href="#">About the font</a></li>
+      <li class="text-center py-2 border-b-2 border-black"><a href="#">How to use</a></li>
+      <li class="text-center py-2 border-b-2 border-black"><a href="#">Design process</a></li>
+    </ul>
+  </nav>
 </div>
